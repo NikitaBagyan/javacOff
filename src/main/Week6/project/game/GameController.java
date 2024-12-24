@@ -7,16 +7,16 @@ import src.main.Week6.project.ships.Fleet;
 
 public class GameController implements IGameController {
 
-    private final ClassicGameRules classicGameRules;
+    private final IGameRules iGameRules;
     private final GameState gameState;
 
-    public GameController(IGameRules iGameRules, ClassicGameRules classicGameRules, GameState gameState) {
-        this.classicGameRules = classicGameRules;
+    public GameController(IGameRules iGameRules, GameState gameState) {
+        this.iGameRules = iGameRules;
         this.gameState = gameState;
     }
 
     @Override
-    public void startGame(Player player1, Player player2) {
+    public void startGame() {
         System.out.println("Игра началась, первым ходит игрок " + gameState.getCurrentPlayer().getName());
         gameState.setStatus(GameStatus.IN_PROGRESS);
     }
@@ -29,12 +29,12 @@ public class GameController implements IGameController {
 
         Board opponentBoard = getOpponentBoard(player);
 
-        ShotResult result = classicGameRules.checkShot(opponentBoard, coordinate);
+        ShotResult result = iGameRules.checkShot(opponentBoard, coordinate);
         System.out.println("Игрок " + player.getName() + " выстрелил в " + coordinate + ": " + result);
 
         if (result == ShotResult.SUNK) {
             Fleet opponentFleet = getOpponentFleet(player);
-            if (classicGameRules.isFleetSunk(opponentFleet)) {
+            if (iGameRules.isFleetSunk(opponentFleet)) {
                 gameState.setStatus(GameStatus.COMPLETED);
                 System.out.println("Игра завершена! Победитель: " + player.getName());
                 return result;
@@ -54,11 +54,11 @@ public class GameController implements IGameController {
     public GameState getGameState() {
         return gameState;
     }
-    private Board getOpponentBoard(Player player) {
+    public Board getOpponentBoard(Player player) {
         return player.equals(gameState.getPlayer1()) ? gameState.getBoardPlayer2() : gameState.getBoardPlayer1();
     }
 
-    private Fleet getOpponentFleet(Player player) {
+    public Fleet getOpponentFleet(Player player) {
         return player.equals(gameState.getPlayer1()) ? gameState.getFleetPlayer2() : gameState.getFleetPlayer1();
     }
 }

@@ -2,6 +2,7 @@ package src.main.Week6.project.ships;
 
 import src.main.Week6.project.boardTools.Coordinate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Ship {
@@ -12,6 +13,7 @@ public class Ship {
 
     public Ship(int lenght) {
         this.lenght = lenght;
+        this.occupiedCells = new ArrayList<>();
     }
 
     public boolean isHit(Coordinate coordinate) {

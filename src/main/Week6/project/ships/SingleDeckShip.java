@@ -6,7 +6,7 @@ import java.util.List;
 
 public class SingleDeckShip extends Ship{
 
-    public SingleDeckShip(int lenght, List<Coordinate> occupiedCells) {
+    public SingleDeckShip() {
         super(ShipLenght.SINGLE_DECK_LENGHT.getDescription());
     }
 }

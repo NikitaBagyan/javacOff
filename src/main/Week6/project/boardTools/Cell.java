@@ -2,6 +2,7 @@ package src.main.Week6.project.boardTools;
 
 import src.main.Week6.project.ships.Ship;
 
+
 public class Cell {
 
     private CellState cellState;

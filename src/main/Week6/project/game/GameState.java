@@ -13,8 +13,20 @@ public class GameState {
     private Fleet fleetPlayer2;
     private Player player1;
     private Player player2;
+
     private Player currentPlayer;
     private GameStatus status;
+
+    public GameState(Board boardPlayer1, Board boardPlayer2, Fleet fleetPlayer1, Fleet fleetPlayer2, Player player1, Player player2) {
+        this.boardPlayer1 = boardPlayer1;
+        this.boardPlayer2 = boardPlayer2;
+        this.fleetPlayer1 = fleetPlayer1;
+        this.fleetPlayer2 = fleetPlayer2;
+        this.player1 = player1;
+        this.player2 = player2;
+        currentPlayer = player1;
+        status = GameStatus.IN_PROGRESS;
+    }
 
     void switchTurn() {
         if (Objects.equals(currentPlayer, player1)) {

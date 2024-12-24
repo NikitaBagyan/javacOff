@@ -14,16 +14,24 @@ public class ClassicGameRules implements IGameRules {
     @Override
     public ShotResult checkShot(Board board, Coordinate coordinate) {
         cell = board.getCell(coordinate);
-        switch (cell.getCellState()) {
-            case EMPTY -> shotResult = ShotResult.MISS;
-            case SHIP -> shotResult = ShotResult.HIT;
-            default -> throw new IllegalArgumentException();
+        if (cell.getCellState() == CellState.SHIP) {
+            hitRegister(board, coordinate);
+            if (cell.getShip().isSunk()) {
+                return ShotResult.SUNK;
+            }
+            return ShotResult.HIT;
         }
-        return shotResult;
+        cell.setCellState(CellState.MISS_HIT);
+        return ShotResult.MISS;
     }
 
     @Override
     public boolean isFleetSunk(Fleet fleet) {
         return fleet.isAllSunk();
+    }
+
+    private void hitRegister(Board board, Coordinate coordinate) {
+        cell.getShip().isHit(coordinate);
+        cell.setCellState(CellState.HIT_ON_SHIP);
     }
 }

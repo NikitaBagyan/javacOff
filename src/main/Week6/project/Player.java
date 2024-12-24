@@ -9,6 +9,12 @@ public class Player {
     Board board;
     Fleet fleet;
 
+    public Player(String name, Board board, Fleet fleet) {
+        this.name = name;
+        this.board = board;
+        this.fleet = fleet;
+    }
+
     public String getName() {
         return name;
     }

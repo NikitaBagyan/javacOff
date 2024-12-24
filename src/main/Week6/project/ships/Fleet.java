@@ -14,4 +14,7 @@ public class Fleet {
     public boolean isAllSunk() {
         return shipList.stream().allMatch(value -> value.isSunk());
     }
+    public boolean fleetComplete() {
+        return shipList.size() == 10;
+    }
 }
